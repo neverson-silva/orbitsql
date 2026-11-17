@@ -1,0 +1,484 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsql.dev/schemas/catalog-snapshot.schema.json",
+  "title": "OrbitSQL CatalogSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "connectionId",
+    "databaseId",
+    "dialect",
+    "version",
+    "generatedAt",
+    "databases",
+    "schemas",
+    "tables",
+    "views",
+    "materializedViews",
+    "functions",
+    "procedures",
+    "sequences",
+    "types",
+    "triggers",
+    "extensions",
+    "partitions",
+    "principals",
+    "permissions",
+    "synonyms",
+    "foreignKeys",
+    "indexes",
+    "constraints"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "connectionId": { "type": "string", "minLength": 1 },
+    "databaseId": { "type": "string", "minLength": 1 },
+    "dialect": {
+      "enum": [
+        "postgresql",
+        "mysql",
+        "mariadb",
+        "sqlserver",
+        "oracle",
+        "sqlite",
+        "generic"
+      ]
+    },
+    "version": { "type": "string", "minLength": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "databases": { "type": "array", "items": { "$ref": "#/$defs/database" } },
+    "schemas": { "type": "array", "items": { "$ref": "#/$defs/schema" } },
+    "tables": { "type": "array", "items": { "$ref": "#/$defs/table" } },
+    "views": { "type": "array", "items": { "$ref": "#/$defs/view" } },
+    "materializedViews": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/view" }
+    },
+    "functions": { "type": "array", "items": { "$ref": "#/$defs/function" } },
+    "procedures": { "type": "array", "items": { "$ref": "#/$defs/procedure" } },
+    "sequences": { "type": "array", "items": { "$ref": "#/$defs/sequence" } },
+    "types": { "type": "array", "items": { "$ref": "#/$defs/type" } },
+    "triggers": { "type": "array", "items": { "$ref": "#/$defs/trigger" } },
+    "extensions": { "type": "array", "items": { "$ref": "#/$defs/extension" } },
+    "partitions": { "type": "array", "items": { "$ref": "#/$defs/partition" } },
+    "principals": { "type": "array", "items": { "$ref": "#/$defs/principal" } },
+    "permissions": { "type": "array", "items": { "$ref": "#/$defs/permission" } },
+    "synonyms": { "type": "array", "items": { "$ref": "#/$defs/synonym" } },
+    "foreignKeys": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/foreignKey" }
+    },
+    "indexes": { "type": "array", "items": { "$ref": "#/$defs/index" } },
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraint" }
+    }
+  },
+  "$defs": {
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "system"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "system": { "type": "boolean" }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "enabled"],
+      "properties": {
+        "id": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "tableId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "enabled": { "type": "boolean" },
+        "definition": { "type": "string" }
+      }
+    },
+    "extension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "version": { "type": "string" }
+      }
+    },
+    "partition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "tableId"],
+      "properties": {
+        "id": { "type": "string" },
+        "tableId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "parentId": { "type": "string" },
+        "bound": { "type": "string" }
+      }
+    },
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "kind"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "kind": { "type": "string" },
+        "login": { "type": "string" }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "principalId", "permission", "state"],
+      "properties": {
+        "id": { "type": "string" },
+        "principalId": { "type": "string" },
+        "objectId": { "type": "string" },
+        "permission": { "type": "string" },
+        "state": { "type": "string" }
+      }
+    },
+    "synonym": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "schemaId", "name", "target"],
+      "properties": {
+        "id": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "target": { "type": "string" }
+      }
+    },
+    "identifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw", "normalized", "quoted", "quoteStyle"],
+      "properties": {
+        "raw": { "type": "string" },
+        "normalized": { "type": "string" },
+        "quoted": { "type": "boolean" },
+        "quoteStyle": { "enum": ["none", "double", "backtick", "bracket"] }
+      }
+    },
+    "typeRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "name"],
+      "properties": {
+        "family": {
+          "enum": [
+            "unknown",
+            "null",
+            "boolean",
+            "integer",
+            "decimal",
+            "float",
+            "text",
+            "binary",
+            "date",
+            "time",
+            "timestamp",
+            "interval",
+            "uuid",
+            "json",
+            "xml",
+            "array",
+            "enum",
+            "spatial",
+            "custom"
+          ]
+        },
+        "name": { "type": "string" },
+        "nullable": { "type": "boolean" },
+        "precision": { "type": "integer", "minimum": 0 },
+        "scale": { "type": "integer", "minimum": 0 },
+        "elementType": { "$ref": "#/$defs/typeRef" }
+      }
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "databaseId", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "catalogId": { "type": "string" },
+        "databaseId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "comment": { "type": "string" }
+      }
+    },
+    "column": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "tableId",
+        "ordinal",
+        "name",
+        "type",
+        "nullable",
+        "generated",
+        "identity",
+        "computed",
+        "primaryKey",
+        "foreignKeyMemberships",
+        "uniqueMemberships"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "tableId": { "type": "string" },
+        "ordinal": { "type": "integer", "minimum": 0 },
+        "name": { "$ref": "#/$defs/identifier" },
+        "type": { "$ref": "#/$defs/typeRef" },
+        "nullable": { "type": "boolean" },
+        "generated": { "type": "boolean" },
+        "identity": { "type": "boolean" },
+        "computed": { "type": "boolean" },
+        "defaultValue": { "type": "string" },
+        "primaryKey": { "type": "boolean" },
+        "foreignKeyMemberships": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "uniqueMemberships": { "type": "array", "items": { "type": "string" } },
+        "comment": { "type": "string" }
+      }
+    },
+    "foreignKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "sourceTableId",
+        "sourceColumnIds",
+        "targetTableId",
+        "targetColumnIds"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "sourceTableId": { "type": "string" },
+        "sourceColumnIds": { "type": "array", "items": { "type": "string" } },
+        "targetTableId": { "type": "string" },
+        "targetColumnIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "databaseId",
+        "schemaId",
+        "name",
+        "columns",
+        "foreignKeys",
+        "uniqueConstraints",
+        "checkConstraints",
+        "indexes",
+        "temporary"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "catalogId": { "type": "string" },
+        "databaseId": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "columns": { "type": "array", "items": { "$ref": "#/$defs/column" } },
+        "foreignKeys": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/foreignKey" }
+        },
+        "primaryKey": { "$ref": "#/$defs/primaryKey" },
+        "uniqueConstraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/uniqueConstraint" }
+        },
+        "checkConstraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/checkConstraint" }
+        },
+        "indexes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/index" }
+        },
+        "estimatedRows": { "type": "integer", "minimum": 0 },
+        "comment": { "type": "string" },
+        "temporary": { "type": "boolean" },
+        "foreign": { "type": "boolean" }
+      }
+    },
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "databaseId", "schemaId", "name", "columns"],
+      "properties": {
+        "id": { "type": "string" },
+        "catalogId": { "type": "string" },
+        "databaseId": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "columns": { "type": "array", "items": { "$ref": "#/$defs/column" } },
+        "comment": { "type": "string" }
+      }
+    },
+    "primaryKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "tableId", "columnIds"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "tableId": { "type": "string" },
+        "columnIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "uniqueConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "tableId", "columnIds"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "tableId": { "type": "string" },
+        "columnIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "checkConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "tableId"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "tableId": { "type": "string" },
+        "expression": { "type": "string" }
+      }
+    },
+    "index": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "tableId", "columnIds", "unique", "primary"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "tableId": { "type": "string" },
+        "columnIds": { "type": "array", "items": { "type": "string" } },
+        "unique": { "type": "boolean" },
+        "primary": { "type": "boolean" }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "type", "direction", "ordinal"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "type": { "$ref": "#/$defs/typeRef" },
+        "direction": { "enum": ["in", "out", "inout"] },
+        "ordinal": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "function": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "parameters",
+        "returnType",
+        "variadic",
+        "overloads"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/parameter" }
+        },
+        "returnType": { "$ref": "#/$defs/typeRef" },
+        "variadic": { "type": "boolean" },
+        "overloads": { "type": "array", "items": { "type": "string" } },
+        "kind": { "enum": ["function", "aggregate", "builtin"] }
+      }
+    },
+    "procedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "parameters"],
+      "properties": {
+        "id": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/parameter" }
+        }
+      }
+    },
+    "sequence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "schemaId", "name", "type"],
+      "properties": {
+        "id": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "type": { "$ref": "#/$defs/typeRef" }
+      }
+    },
+    "type": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "family"],
+      "properties": {
+        "id": { "type": "string" },
+        "schemaId": { "type": "string" },
+        "name": { "$ref": "#/$defs/identifier" },
+        "family": {
+          "enum": [
+            "unknown",
+            "null",
+            "boolean",
+            "integer",
+            "decimal",
+            "float",
+            "text",
+            "binary",
+            "date",
+            "time",
+            "timestamp",
+            "interval",
+            "uuid",
+            "json",
+            "xml",
+            "array",
+            "enum",
+            "spatial",
+            "custom"
+          ]
+        },
+        "definition": { "type": "string" }
+      }
+    },
+    "constraint": {
+      "anyOf": [
+        { "$ref": "#/$defs/primaryKey" },
+        { "$ref": "#/$defs/uniqueConstraint" },
+        { "$ref": "#/$defs/checkConstraint" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,556 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--ds-font-ui);
+  --font-mono: "JetBrains Mono Variable", monospace;
+  --font-ui: var(--ds-font-ui);
+  --font-editor: var(--ds-font-editor);
+  --font-display-lg: var(--ds-type-display-lg-font-family);
+  --font-headline-md: var(--ds-type-headline-md-font-family);
+  --font-headline-sm: var(--ds-type-headline-sm-font-family);
+  --font-body-lg: var(--ds-type-body-lg-font-family);
+  --font-body-md: var(--ds-type-body-md-font-family);
+  --font-body-sm: var(--ds-type-body-sm-font-family);
+  --font-code-lg: var(--ds-type-code-lg-font-family);
+  --font-code-md: var(--ds-type-code-md-font-family);
+  --font-code-sm: var(--ds-type-code-sm-font-family);
+  --font-label-md: var(--ds-type-label-md-font-family);
+  --font-label-caps: var(--ds-type-label-caps-font-family);
+  --color-primary: var(--ds-color-primary);
+  --color-secondary: var(--ds-color-secondary);
+  --color-tertiary: var(--ds-color-tertiary);
+  --color-success: var(--ds-color-success);
+  --color-warning: var(--ds-color-warning);
+  --color-error: var(--ds-color-error);
+  --color-background: var(--ds-app-content);
+  --color-app-shell: var(--ds-app-shell);
+  --color-app-chrome: var(--ds-app-chrome);
+  --color-app-chrome-subtle: var(--ds-app-chrome-subtle);
+  --color-app-content: var(--ds-app-content);
+  --color-app-content-subtle: var(--ds-app-content-subtle);
+  --color-app-sidebar: var(--ds-app-sidebar);
+  --color-app-workspace: var(--ds-app-workspace);
+  --color-app-workspace-subtle: var(--ds-app-workspace-subtle);
+  --color-app-editor: var(--ds-app-editor);
+  --color-app-results: var(--ds-app-results);
+  --color-app-toolbar: var(--ds-app-toolbar);
+  --color-app-statusbar: var(--ds-app-statusbar);
+  --color-surface-base: var(--ds-surface-base);
+  --color-surface-subtle: var(--ds-surface-subtle);
+  --color-surface-raised: var(--ds-surface-raised);
+  --color-surface-floating: var(--ds-surface-floating);
+  --color-dialog-surface: var(--ds-dialog-surface);
+  --color-dialog-content-surface: var(--ds-dialog-content-surface);
+  --color-dialog-sidebar-surface: var(--ds-dialog-sidebar-surface);
+  --color-surface-overlay: var(--ds-surface-overlay);
+  --color-surface-divider: var(--ds-surface-divider);
+  --color-structural-divider: var(--ds-structural-divider);
+  --color-selected-surface: var(--ds-selected-surface);
+  --color-overlay-backdrop: var(--ds-overlay-backdrop);
+  --color-control-surface: var(--ds-control-surface);
+  --color-control-surface-hover: var(--ds-control-surface-hover);
+  --color-control-surface-focus: var(--ds-control-surface-focus);
+  --color-control-surface-active: var(--ds-control-surface-active);
+  --color-control-surface-disabled: var(--ds-control-surface-disabled);
+  --color-control-surface-readonly: var(--ds-control-surface-readonly);
+  --color-control-border: var(--ds-control-border);
+  --color-control-border-hover: var(--ds-control-border-hover);
+  --color-control-border-focus: var(--ds-control-border-focus);
+  --color-control-border-disabled: var(--ds-control-border-disabled);
+  --color-control-border-readonly: var(--ds-control-border-readonly);
+  --color-control-foreground: var(--ds-control-foreground);
+  --color-control-foreground-disabled: var(--ds-control-foreground-disabled);
+  --color-control-placeholder: var(--ds-control-placeholder);
+  --color-control-placeholder-disabled: var(--ds-control-placeholder-disabled);
+  --color-control-icon: var(--ds-control-icon);
+  --color-control-icon-emphasis: var(--ds-control-icon-emphasis);
+  --color-control-focus-ring: var(--ds-control-focus-ring);
+  --color-db-object-database: var(--ds-db-object-database);
+  --color-db-object-schema: var(--ds-db-object-schema);
+  --color-db-object-table: var(--ds-db-object-table);
+  --color-db-object-view: var(--ds-db-object-view);
+  --color-db-object-procedure: var(--ds-db-object-procedure);
+  --color-db-object-foreign-table: var(--ds-db-object-foreign-table);
+  --color-db-object-materialized-view: var(--ds-db-object-materialized-view);
+  --color-db-object-index: var(--ds-db-object-index);
+  --color-db-object-function: var(--ds-db-object-function);
+  --color-db-object-sequence: var(--ds-db-object-sequence);
+  --color-db-object-type: var(--ds-db-object-type);
+  --color-db-object-aggregate: var(--ds-db-object-aggregate);
+  --color-db-object-metadata: var(--ds-db-object-metadata);
+  --color-floating-surface: var(--ds-floating-surface);
+  --color-floating-border: var(--ds-floating-border);
+  --color-surface-dim: var(--ds-color-surface-dim);
+  --color-surface-bright: var(--ds-color-surface-bright);
+  --color-surface-container-lowest: var(--ds-color-surface-container-lowest);
+  --color-surface: var(--ds-color-surface);
+  --color-surface-container: var(--ds-color-surface-container);
+  --color-surface-container-low: var(--ds-color-surface-container-low);
+  --color-surface-container-high: var(--ds-color-surface-container-high);
+  --color-surface-container-highest: var(--ds-color-surface-container-highest);
+  --color-on-surface: var(--ds-color-on-surface);
+  --color-on-surface-variant: var(--ds-color-on-surface-variant);
+  --color-inverse-surface: var(--ds-color-inverse-surface);
+  --color-inverse-on-surface: var(--ds-color-inverse-on-surface);
+  --color-outline: var(--ds-color-outline);
+  --color-outline-variant: var(--ds-color-outline-variant);
+  --color-surface-tint: var(--ds-color-surface-tint);
+  --color-on-primary: var(--ds-color-on-primary);
+  --color-primary-container: var(--ds-color-primary-container);
+  --color-on-primary-container: var(--ds-color-on-primary-container);
+  --color-inverse-primary: var(--ds-color-inverse-primary);
+  --color-on-secondary: var(--ds-color-on-secondary);
+  --color-secondary-container: var(--ds-color-secondary-container);
+  --color-on-secondary-container: var(--ds-color-on-secondary-container);
+  --color-on-tertiary: var(--ds-color-on-tertiary);
+  --color-tertiary-container: var(--ds-color-tertiary-container);
+  --color-on-tertiary-container: var(--ds-color-on-tertiary-container);
+  --color-on-error: var(--ds-color-on-error);
+  --color-error-container: var(--ds-color-error-container);
+  --color-on-error-container: var(--ds-color-on-error-container);
+  --color-on-success: var(--ds-color-on-success);
+  --color-success-container: var(--ds-color-success-container);
+  --color-on-success-container: var(--ds-color-on-success-container);
+  --color-on-warning: var(--ds-color-on-warning);
+  --color-warning-container: var(--ds-color-warning-container);
+  --color-on-warning-container: var(--ds-color-on-warning-container);
+  --color-primary-fixed: var(--ds-color-primary-fixed);
+  --color-primary-fixed-dim: var(--ds-color-primary-fixed-dim);
+  --color-on-primary-fixed: var(--ds-color-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--ds-color-on-primary-fixed-variant);
+  --color-secondary-fixed: var(--ds-color-secondary-fixed);
+  --color-secondary-fixed-dim: var(--ds-color-secondary-fixed-dim);
+  --color-on-secondary-fixed: var(--ds-color-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(
+    --ds-color-on-secondary-fixed-variant
+  );
+  --color-tertiary-fixed: var(--ds-color-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--ds-color-tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--ds-color-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--ds-color-on-tertiary-fixed-variant);
+  --color-editor: var(--ds-app-editor);
+  --color-editor-foreground: var(--ds-color-on-surface);
+  --color-syntax-keyword: var(--ds-color-syntax-keyword);
+  --color-syntax-string: var(--ds-color-syntax-string);
+  --color-syntax-number: var(--ds-color-syntax-number);
+  --color-syntax-comment: var(--ds-color-syntax-comment);
+  --color-syntax-function: var(--ds-color-syntax-function);
+  --color-syntax-variable: var(--ds-color-syntax-variable);
+  --color-syntax-operator: var(--ds-color-syntax-operator);
+  --color-syntax-type: var(--ds-color-syntax-type);
+  --color-syntax-table: var(--ds-color-syntax-table);
+  --spacing-0: var(--ds-space-0);
+  --spacing-1: var(--ds-space-1);
+  --spacing-2: var(--ds-space-2);
+  --spacing-3: var(--ds-space-3);
+  --spacing-4: var(--ds-space-4);
+  --spacing-5: var(--ds-space-5);
+  --spacing-6: var(--ds-space-6);
+  --spacing-7: var(--ds-space-7);
+  --spacing-8: var(--ds-space-8);
+  --spacing-9: var(--ds-space-9);
+  --spacing-10: var(--ds-space-10);
+  --spacing-11: var(--ds-space-11);
+  --spacing-12: var(--ds-space-12);
+  --spacing-sidebar-content-inset: var(--ds-sidebar-content-inset);
+  --spacing-0_5: calc(var(--ds-spacing-unit) * 0.5);
+  --spacing-1_5: calc(var(--ds-spacing-unit) * 1.5);
+  --spacing-2_5: calc(var(--ds-spacing-unit) * 2.5);
+  --spacing-3_5: calc(var(--ds-spacing-unit) * 3.5);
+  --spacing-gutter: var(--ds-space-gutter);
+  --spacing-gutter-dense: var(--ds-space-gutter-dense);
+  --spacing-margin: var(--ds-space-margin);
+  --spacing-margin-compact: var(--ds-space-margin-compact);
+  --spacing-space-xs: var(--ds-space-space-xs);
+  --spacing-space-sm: var(--ds-space-space-sm);
+  --spacing-space-md: var(--ds-space-space-md);
+  --spacing-space-lg: var(--ds-space-space-lg);
+  --spacing-space-xl: var(--ds-space-space-xl);
+  --radius-none: var(--ds-radius-none);
+  --radius-sm: var(--ds-radius-sm);
+  --radius: var(--ds-radius-base);
+  --radius-md: var(--ds-radius-md);
+  --radius-lg: var(--ds-radius-lg);
+  --radius-xl: var(--ds-radius-xl);
+  --radius-full: var(--ds-radius-full);
+  --shadow-panel: var(--ds-elevation-panel);
+  --shadow-floating: var(--ds-elevation-floating);
+  --shadow-overlay: var(--ds-elevation-overlay);
+  --border-width-ring: calc(var(--ds-spacing-unit) * 2);
+  --text-display-lg: var(--ds-type-display-lg-font-size);
+  --text-display-lg--line-height: var(--ds-type-display-lg-line-height);
+  --text-headline-md: var(--ds-type-headline-md-font-size);
+  --text-headline-md--line-height: var(--ds-type-headline-md-line-height);
+  --text-headline-sm: var(--ds-type-headline-sm-font-size);
+  --text-headline-sm--line-height: var(--ds-type-headline-sm-line-height);
+  --text-body-lg: var(--ds-type-body-lg-font-size);
+  --text-body-lg--line-height: var(--ds-type-body-lg-line-height);
+  --text-body-md: var(--ds-type-body-md-font-size);
+  --text-body-md--line-height: var(--ds-type-body-md-line-height);
+  --text-body-sm: var(--ds-type-body-sm-font-size);
+  --text-body-sm--line-height: var(--ds-type-body-sm-line-height);
+  --text-code-lg: var(--ds-type-code-lg-font-size);
+  --text-code-lg--line-height: var(--ds-type-code-lg-line-height);
+  --text-code-md: var(--ds-type-code-md-font-size);
+  --text-code-md--line-height: var(--ds-type-code-md-line-height);
+  --text-code-sm: var(--ds-type-code-sm-font-size);
+  --text-code-sm--line-height: var(--ds-type-code-sm-line-height);
+  --text-label-md: var(--ds-type-label-md-font-size);
+  --text-label-md--line-height: var(--ds-type-label-md-line-height);
+  --text-label-caps: var(--ds-type-label-caps-font-size);
+  --text-label-caps--line-height: var(--ds-type-label-caps-line-height);
+  --leading-code-sm: var(--ds-type-code-sm-line-height);
+  --leading-code-md: var(--ds-type-code-md-line-height);
+  --leading-code-lg: var(--ds-type-code-lg-line-height);
+  --font-heading: var(--font-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color: var(--ds-color-on-surface);
+  background: var(--ds-color-background);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-font-ui-size);
+  font-synthesis: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: auto;
+  --background: var(--ds-surface-base);
+  --foreground: var(--ds-color-on-background);
+  --card: var(--ds-surface-raised);
+  --card-foreground: var(--ds-color-on-surface);
+  --popover: var(--ds-floating-surface);
+  --popover-foreground: var(--ds-color-on-surface);
+  --primary: var(--ds-color-primary);
+  --primary-foreground: var(--ds-color-on-primary);
+  --secondary: var(--ds-control-surface);
+  --secondary-foreground: var(--ds-color-on-surface);
+  --muted: var(--ds-surface-subtle);
+  --muted-foreground: var(--ds-color-on-surface-variant);
+  --accent: var(--ds-control-surface-hover);
+  --accent-foreground: var(--ds-color-on-surface);
+  --destructive: var(--ds-color-error);
+  --destructive-foreground: var(--ds-color-on-error);
+  --border: var(--ds-surface-divider);
+  --input: var(--ds-control-border);
+  --ring: var(--ds-control-border-focus);
+  --chart-1: var(--ds-color-primary);
+  --chart-2: var(--ds-color-secondary);
+  --chart-3: var(--ds-color-tertiary);
+  --chart-4: var(--ds-color-success);
+  --chart-5: var(--ds-color-warning);
+  --radius: var(--ds-radius-base);
+  --sidebar: var(--ds-app-sidebar);
+  --sidebar-foreground: var(--ds-color-on-surface);
+  --sidebar-primary: var(--ds-color-primary-container);
+  --sidebar-primary-foreground: var(--ds-color-on-primary-container);
+  --sidebar-accent: var(--ds-selected-surface);
+  --sidebar-accent-foreground: var(--ds-color-on-surface);
+  --sidebar-border: var(--ds-surface-divider);
+  --sidebar-ring: var(--ds-color-primary);
+}
+
+* {
+  scrollbar-color: var(--ds-color-outline) var(--ds-app-chrome-subtle);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--ds-app-chrome-subtle);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid var(--ds-app-chrome-subtle);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-outline);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--ds-color-primary);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--ds-app-content);
+  color: var(--ds-color-on-surface);
+}
+
+.app-shell {
+  --app-workspace-gap: 4px;
+  --app-workspace-inset: 4px;
+  --app-surface-radius: 8px;
+}
+
+.app-surface-region {
+  gap: var(--app-workspace-gap);
+  padding: var(--app-workspace-inset);
+}
+
+.app-navigation-surface,
+.app-workbench-surface {
+  border-radius: var(--app-surface-radius);
+}
+
+.app-navigation-surface {
+  background: var(--ds-app-sidebar);
+}
+
+.app-sidebar-surface {
+  background: transparent;
+}
+
+.app-workbench-surface {
+  overflow: hidden;
+  background: var(--ds-app-workspace);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ds-color-primary);
+  outline-offset: 2px;
+}
+
+[data-slot="input-group"] > [data-slot="input-group-control"]:focus,
+[data-slot="input-group"] > [data-slot="input-group-control"]:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
+[data-slot="command-input"]:focus,
+[data-slot="command-input"]:focus-visible {
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  outline-offset: 0;
+}
+
+[data-slot="query-editor"]:focus,
+[data-slot="query-editor"]:focus-visible {
+  box-shadow: none;
+  outline: none;
+  outline-offset: 0;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ds-color-primary) 18%, transparent);
+}
+
+.ds-tracking-caps {
+  letter-spacing: var(--ds-type-label-caps-letter-spacing);
+}
+
+.ds-tracking-headline {
+  letter-spacing: var(--ds-type-headline-md-letter-spacing);
+}
+
+.ds-tracking-caps-wide {
+  letter-spacing: calc(var(--ds-type-label-caps-letter-spacing) * 2);
+}
+
+.sidebar-resize-handle {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  z-index: 10;
+  width: 12px;
+  margin: 0;
+  padding: 0;
+  transform: translateX(50%);
+  border: 0;
+  appearance: none;
+  cursor: col-resize;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.sidebar-resize-handle::after {
+  display: block;
+  width: 2px;
+  height: 100%;
+  border-radius: 9999px;
+  background: transparent;
+  content: "";
+  transition: background-color 160ms ease;
+}
+
+.sidebar-resize-handle:hover::after,
+.sidebar-resize-handle:focus-visible::after,
+.sidebar-resize-handle.is-resizing::after {
+  background: var(--ds-color-outline);
+}
+
+.sidebar-resize-handle:focus-visible {
+  outline: 2px solid var(--ds-color-primary);
+  outline-offset: -2px;
+}
+
+.query-results-resize-handle {
+  position: relative;
+  z-index: 10;
+  height: 13px;
+  width: 100%;
+  margin-block: -6px;
+  padding: 0;
+  border: 0;
+  appearance: none;
+  cursor: row-resize;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.query-results-resize-handle::after {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--ds-color-structural-divider);
+  content: "";
+  transition: background-color 160ms ease;
+}
+
+.query-results-resize-handle:hover::after,
+.query-results-resize-handle:focus-visible::after,
+.query-results-resize-handle.is-resizing::after {
+  background: var(--ds-color-outline);
+}
+
+.query-results-resize-handle:focus-visible {
+  outline: 2px solid var(--ds-color-primary);
+  outline-offset: -2px;
+}
+
+[data-slot="dialog-content"],
+[data-slot="alert-dialog-content"],
+[data-slot="sheet-content"] {
+  background-color: var(--ds-dialog-surface);
+  border-color: var(--ds-floating-border);
+  color: var(--ds-color-on-surface);
+  box-shadow: var(--ds-elevation-overlay);
+}
+
+[data-slot="input-group"] {
+  --input-group-autofill-surface: var(--ds-control-surface);
+}
+
+[data-slot="input-group"]:hover {
+  --input-group-autofill-surface: var(--ds-control-surface-hover);
+}
+
+[data-slot="input-group"]:focus-within {
+  --input-group-autofill-surface: var(--ds-control-surface-focus);
+}
+
+[data-slot="input-group"]:has(:disabled) {
+  --input-group-autofill-surface: var(--ds-control-surface-disabled);
+}
+
+[data-slot="input-group"]:has(:read-only),
+[data-slot="input-group"]:has([aria-readonly="true"]) {
+  --input-group-autofill-surface: var(--ds-control-surface-readonly);
+}
+
+[data-slot="input-group"]:has([data-popup-open]) {
+  --input-group-autofill-surface: var(--ds-control-surface-active);
+}
+
+[data-slot="input-group-control"]:autofill,
+[data-slot="input-group-control"]:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--input-group-autofill-surface) inset;
+  -webkit-text-fill-color: var(--ds-control-foreground);
+}
+
+.ds-screen-glow {
+  background-image: radial-gradient(
+    circle at 50% 30%,
+    color-mix(in srgb, var(--ds-color-primary) 6%, transparent),
+    transparent 42%
+  );
+}
+
+.ds-diagram-canvas {
+  background-color: var(--ds-app-editor);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--ds-color-outline-variant) 48%, transparent)
+      calc(var(--ds-spacing-unit) * 0.175),
+    transparent calc(var(--ds-spacing-unit) * 0.175)
+  );
+  background-size: calc(var(--ds-spacing-unit) * 4.5)
+    calc(var(--ds-spacing-unit) * 4.5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-mono;
+  }
+}

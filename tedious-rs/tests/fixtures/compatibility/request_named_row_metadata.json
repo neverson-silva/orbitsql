@@ -1,0 +1,18 @@
+{
+  "source": [
+    "tedious-node/src/request.ts",
+    "tedious-node/src/token/handler.ts"
+  ],
+  "row": {
+    "node": "useColumnNames emits an object and duplicate column names contain all values in an array",
+    "rust": "RequestEvent::NamedRow is the Rust payload variant for the row event and preserves duplicate column values in arrays",
+    "status": "implemented",
+    "required_change": null
+  },
+  "columnMetadata": {
+    "node": "useColumnNames emits an object keyed by column name and keeps the first metadata entry for duplicate names",
+    "rust": "RequestEvent::NamedColumnMetadata is the Rust payload variant for the columnMetadata event",
+    "status": "implemented",
+    "required_change": null
+  }
+}

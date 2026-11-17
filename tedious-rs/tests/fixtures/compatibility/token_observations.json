@@ -1,0 +1,7 @@
+{
+  "cases": [
+    {"name":"done_success","hex":"fd000000000000000000000000","node_expected":["token:DONE:token=fd;more=false;row_count=None"],"rust_expected":["token:DONE:token=fd;more=false;row_count=None"],"capture":"tedious-node/lib/token/done-token-parser.js with the token byte removed before parser invocation"},
+    {"name":"return_status_zero","hex":"7900000000","node_expected":["token:RETURNSTATUS:value=0"],"rust_expected":["token:RETURNSTATUS:value=0"],"capture":"tedious-node/lib/token/returnstatus-token-parser.js with the token byte removed before parser invocation"},
+    {"name":"done_truncated","hex":"fd000000","node_expected":["error:token:not_enough_data"],"rust_expected":["error:token:not_enough_data"],"capture":"tedious-node/lib/token/done-token-parser.js classified NotEnoughDataError"}
+  ]
+}

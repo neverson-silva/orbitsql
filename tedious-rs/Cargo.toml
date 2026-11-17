@@ -1,0 +1,37 @@
+[package]
+name = "tedious-rs"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+aes.workspace = true
+cbc.workspace = true
+cipher.workspace = true
+encoding_rs.workspace = true
+futures-util.workspace = true
+gethostname.workspace = true
+hmac.workspace = true
+md-5.workspace = true
+md4.workspace = true
+native-tls.workspace = true
+rand.workspace = true
+reqwest.workspace = true
+rustls.workspace = true
+rustls-native-certs.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+socket2.workspace = true
+tokio.workspace = true
+tokio-native-tls.workspace = true
+tokio-rustls.workspace = true
+url.workspace = true
+yore.workspace = true
+
+[lib]
+name = "tedious_rs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "tedious-rs"
+path = "src/main.rs"

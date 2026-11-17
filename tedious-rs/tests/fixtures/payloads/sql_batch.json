@@ -1,0 +1,1 @@
+{"name":"sql_batch_select_1","source":"tedious-node sqlbatch-payload.ts structure","node_observation":"530045004c00450043005400200031","gap":"Node all-headers behavior is represented by the same deterministic input","expected_hex":"16000000120000000200000000000000000001000000530045004c0045004300540020003100"}

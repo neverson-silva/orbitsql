@@ -1,0 +1,50 @@
+[package]
+name = "orbitsql-ui"
+version.workspace = true
+description = "A professional desktop SQL workbench for exploring and querying databases."
+authors = ["Orbit SQL"]
+edition.workspace = true
+
+[lib]
+name = "orbitsql_ui_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[test]]
+name = "orbitsql_ui_catalog"
+path = "../../tedious-rs/tests/unit/orbitsql_ui_catalog.rs"
+
+[[test]]
+name = "orbitsql_ui_database_adapters"
+path = "../../tedious-rs/tests/integration/orbitsql_ui_database_adapters.rs"
+
+[[test]]
+name = "orbitsql_ui_result_sessions"
+path = "../../tedious-rs/tests/integration/orbitsql_ui_result_sessions.rs"
+
+[[test]]
+name = "orbitsql_ui_session_manager"
+path = "../../tedious-rs/tests/unit/orbitsql_ui_session_manager.rs"
+
+[build-dependencies]
+tauri-build = { workspace = true, features = [] }
+
+[dependencies]
+argon2.workspace = true
+chacha20poly1305.workspace = true
+tauri = { workspace = true, features = [] }
+tauri-plugin-store.workspace = true
+chrono.workspace = true
+futures-util.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sqlx.workspace = true
+tedious-rs.workspace = true
+keyring.workspace = true
+rand.workspace = true
+uuid.workspace = true
+zeroize.workspace = true
+tokio.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+tokio.workspace = true

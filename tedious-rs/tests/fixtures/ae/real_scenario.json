@@ -1,0 +1,23 @@
+{
+  "key_store_provider": "AZURE_KEY_VAULT",
+  "key_encryption_algorithm": "RSA_OAEP",
+  "column_encryption_algorithm": "AEAD_AES_256_CBC_HMAC_SHA256",
+  "encryption_type": "DETERMINISTIC",
+  "column_type": "nvarchar(100)",
+  "required_environment": [
+    "TEDIOUS_RS_RUN_INTEGRATION",
+    "TEDIOUS_RS_RUN_AE_INTEGRATION",
+    "AZURE_CLIENT_ID",
+    "AZURE_CLIENT_SECRET",
+    "AZURE_TENANT_ID",
+    "TEDIOUS_RS_AE_KEY_PATH"
+  ],
+  "assertions": [
+    "CMK is created in SQL Server",
+    "CEK is wrapped by Azure Key Vault",
+    "encrypted column is created in SQL Server",
+    "parameterized insert encrypts a value",
+    "select decrypts the value",
+    "objects are cleaned up"
+  ]
+}

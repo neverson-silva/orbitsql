@@ -1,0 +1,78 @@
+{
+  "scenarios": [
+    {
+      "name": "success_callback_before_completion",
+      "node_expected": [
+        "callback:ok",
+        "event:requestCompleted"
+      ],
+      "rust_expected": [
+        "callback:ok",
+        "event:requestCompleted"
+      ],
+      "gaps": [],
+      "final_state": {
+        "node": null,
+        "rust": ["state:Completed"],
+        "gap": "Node final request state was not captured"
+      }
+    },
+    {
+      "name": "failure_event_callback_completion",
+      "node_expected": null,
+      "rust_expected": [
+        "callback:error:ERUNTIME",
+        "event:requestCompleted"
+      ],
+      "gaps": ["Rust Request::fail does not emit the separate error event"],
+      "final_state": {
+        "node": null,
+        "rust": ["state:Failed"],
+        "gap": "Node final request state was not captured"
+      },
+      "error": {
+        "node": null,
+        "rust": ["code=ERUNTIME"],
+        "gap": "Node error object was not compared in this synthetic Rust-only scenario"
+      }
+    },
+    {
+      "name": "invalid_second_begin",
+      "node_expected": [
+        "error:EINVALIDSTATE"
+      ],
+      "rust_expected": [
+        "error:EINVALIDSTATE"
+      ],
+      "gaps": [],
+      "final_state": {
+        "node": null,
+        "rust": ["state:Running"],
+        "gap": "Node state after rejected begin was not captured"
+      },
+      "error": {
+        "node": null,
+        "rust": ["code=EINVALIDSTATE"],
+        "gap": "Node rejected-begin error object was not captured"
+      }
+    },
+    {
+      "name": "preparing_failure_callback",
+      "node_expected": null,
+      "rust_expected": [
+        "event:error:EPREPARE"
+      ],
+      "gaps": ["Node error object was not compared in this synthetic Rust-only scenario"],
+      "final_state": {
+        "node": null,
+        "rust": ["state:Created"],
+        "gap": "Node final request state was not captured"
+      },
+      "error": {
+        "node": null,
+        "rust": ["code=EPREPARE"],
+        "gap": "Node error object was not compared in this synthetic Rust-only scenario"
+      }
+    }
+  ]
+}

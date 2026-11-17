@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: orbitsql_completion
+      POSTGRES_USER: orbitsql
+      POSTGRES_PASSWORD: ${ORBITSQL_DOCKER_PASSWORD:?ORBITSQL_DOCKER_PASSWORD is required}
+    ports:
+      - "55432:5432"
+    volumes:
+      - ./docker/init/postgres:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U orbitsql -d orbitsql_completion"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: orbitsql_completion
+      MYSQL_USER: orbitsql
+      MYSQL_PASSWORD: ${ORBITSQL_DOCKER_PASSWORD:?ORBITSQL_DOCKER_PASSWORD is required}
+      MYSQL_ROOT_PASSWORD: ${ORBITSQL_DOCKER_PASSWORD:?ORBITSQL_DOCKER_PASSWORD is required}
+    ports:
+      - "53306:3306"
+    volumes:
+      - ./docker/init/mysql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uorbitsql -p$$MYSQL_PASSWORD --silent"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+
+  mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: orbitsql_completion
+      MARIADB_USER: orbitsql
+      MARIADB_PASSWORD: ${ORBITSQL_DOCKER_PASSWORD:?ORBITSQL_DOCKER_PASSWORD is required}
+      MARIADB_ROOT_PASSWORD: ${ORBITSQL_DOCKER_PASSWORD:?ORBITSQL_DOCKER_PASSWORD is required}
+    ports:
+      - "53307:3306"
+    volumes:
+      - ./docker/init/mariadb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -uorbitsql -p$$MARIADB_PASSWORD --silent"]
+      interval: 2s
+      timeout: 2s
+      retries: 30

@@ -1,0 +1,1 @@
+{"name":"bulk_single_int","source":"tedious-node/lib/bulk-load.js","node_observation":"captured","capture":"BulkLoad RowTransform with sanitized table and value","expected_hex":"81010000000000040026040269006400d10407000000fd000000000000000000000000","node_expected_hex":"81010000000000040026040269006400d10407000000fd000000000000000000000000"}
